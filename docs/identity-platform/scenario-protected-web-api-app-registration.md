@@ -2,7 +2,7 @@
 title: Protected web API app registration
 description: Learn how to build a protected web API and acquire all the information you need to register the app.
 author: cilwerner
-manager: CelesteDG
+manager: pmwongera
 ms.author: cwerner
 ms.custom: 
 ms.date: 05/28/2024
@@ -14,6 +14,8 @@ ms.topic: how-to
 ---
 
 # Protected web API: App registration
+
+[!INCLUDE [applies-to-workforce-only](../external-id/includes/applies-to-workforce-only.md)]
 
 This article explains how to register an application for a protected web API.
 
@@ -105,10 +107,10 @@ To add another layer of security, a Microsoft Entra tenant administrator can con
 
 To increase security by restricting token issuance only to client apps that have been assigned app roles:
 
-1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select your app under **Identity** > **Applications** > **App registrations**.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select your app under **Entra ID** > **App registrations**.
 1. On the application's **Overview** page, in **Essentials**, find and select its **Managed application in local directory** link to navigate to its **Enterprise Application Overview** page.
 1. Under **Manage**, select **Properties**.
-1. Set **Assignment required?** to **No**.
+1. Set **Assignment required?** to **Yes**.
 1. Select **Save**.
 
 Microsoft Entra ID will now check for app role assignments of client applications that request access tokens for your web API. If a client app hasn't been assigned any app roles, Microsoft Entra ID returns an error message to the client similar to `_invalid_client: AADSTS501051: Application \<application name\> isn't assigned to a role for the \<web API\>_`.

@@ -2,7 +2,7 @@
 title: Configure a web API that calls web APIs
 description: Learn how to build a web API that calls web APIs (app's code configuration)
 author: cilwerner
-manager: CelesteDG
+manager: pmwongera
 ms.author: cwerner
 ms.custom: 
 ms.date: 07/19/2024
@@ -14,6 +14,8 @@ ms.topic: how-to
 ---
 
 # A web API that calls web APIs: Code configuration
+
+[!INCLUDE [applies-to-workforce-only](../external-id/includes/applies-to-workforce-only.md)]
 
 This article describes how to configure code for a Web API app using the [OAuth 2.0 authorization code flow](v2-oauth2-auth-code-flow.md).
 

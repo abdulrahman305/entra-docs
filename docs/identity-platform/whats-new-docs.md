@@ -4,8 +4,7 @@ description: "New and updated articles in the Microsoft identity platform docume
 author: henrymbuguakiarie
 manager: CelesteDG
 ms.author: henrymbugua
-ms.custom: has-adal-ref
-ms.date: 12/03/2024
+ms.date: 05/02/2025
 ms.service: identity-platform
 
 ms.topic: whats-new
@@ -16,34 +15,39 @@ ms.topic: whats-new
 
 Welcome to what's new in the Microsoft identity platform documentation. This article lists new articles that were added or had significant updates in the last three months.
 
-## December 2024
+## July 2025
 
-No updates available.
+### Updated articles
 
-## November 2024
+- [What is the Microsoft identity platform?](v2-overview.md) - The update improved content clarity.
+
+## June 2025
 
 ### New articles
 
-- [Configure a custom email provider for one time passcode send events (preview)](custom-extension-email-otp-get-started.md)
-- [Tutorial: Call an API from an Angular single-page app](tutorial-single-page-apps-angular-call-api.md)
-- [Tutorial: Create an Angular application and prepare it for authentication](tutorial-single-page-apps-angular-prepare-app.md)
-- [Tutorial: Register an Angular application in a Microsoft Entra ID tenant](tutorial-single-page-apps-angular-register-app.md)
-- [Tutorial: Add sign in and sign out in your Angular single-page application](tutorial-single-page-apps-angular-sign-in-users-app.md)
+- [Restrictions on identifier URIs of Microsoft Entra applications](identifier-uri-restrictions.md)
 
 ### Updated articles
 
-- [How to use Continuous Access Evaluation enabled APIs in your applications](app-resilience-continuous-access-evaluation.md) - CAE page update with code snippets for MSAL libraries
-- [Single sign-on SAML protocol](single-sign-on-saml-protocol.md) - Added clarity to the content
-- [Signing key rollover in the Microsoft identity platform](signing-key-rollover.md) - Added clarity to the content
+- [Retrieve and return data from an OnAttributeCollectionStart event](custom-extension-onattributecollectionstart-retrieve-return-data.md) - Update request payload and response
+- [Retrieve and return data from an OnAttributeCollectionSubmit event](custom-extension-onattributecollectionsubmit-retrieve-return-data.md) - Update request payload and response
+- [Security best practices for application properties in Microsoft Entra ID](security-best-practices-for-app-registration.md) - Update security best practices
+- [Run automated integration tests](test-automate-integration-testing.md) - The update improved content clarity.
 
-## October 2024
+## May 2025
+
+### New articles
+
+- [Email OTP send event reference](custom-extension-email-otp-send-data.md)
 
 ### Updated articles
 
-- [Microsoft identity platform code samples](sample-v2-code.md) - Code sample page update
-- [Microsoft identity platform and OAuth 2.0 implicit grant flow](v2-oauth2-implicit-grant-flow.md) - Implicit grant flow protocol security guidance update
-- [Quickstart: Sign in users and call the Microsoft Graph API from a Node.js web app](quickstart-web-app-nodejs-sign-in.md) - Update NodeJS quickstart to new format
-- [Signing key rollover in the Microsoft identity platform](signing-key-rollover.md) - Add a description of the key refresh algorithm in a language neutral way
-- [What's new for authentication?](reference-breaking-changes.md) - Added clarity to the content
+- [Custom claims provider reference](custom-claims-provider-reference.md) - The update improved content clarity.
+- [Application configuration options](msal-client-application-configuration.md) - The update improved content clarity.
+- [Custom authentication extensions overview](custom-extension-overview.md) - The update improved content clarity.
+- [Single-page application: Acquire a token to call an API](scenario-spa-acquire-token.md) - The update improved content clarity.
+- [Single-page application: Code configuration](scenario-spa-app-configuration.md) - The update improved content clarity.
+- [Single-page application: Add sign-in and sign-out code](scenario-spa-sign-in.md) - The update improved content clarity.
+- [Microsoft Entra authentication and authorization error codes](reference-error-codes.md) - Partially update error code.
 
 

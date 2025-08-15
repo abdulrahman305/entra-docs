@@ -2,7 +2,7 @@
 title: Configure a web app that signs in users
 description: Learn how to build a web app that signs in users (code configuration)
 author: cilwerner
-manager: CelesteDG
+manager: pmwongera
 ms.author: cwerner
 ms.custom: 
 ms.date: 07/19/2024
@@ -14,6 +14,8 @@ ms.topic: how-to
 ---
 
 # Web app that signs in users: Code configuration
+
+[!INCLUDE [applies-to-workforce-only](../external-id/includes/applies-to-workforce-only.md)]
 
 This article describes how to configure code for a web app that signs in users.
 

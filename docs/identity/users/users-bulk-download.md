@@ -1,16 +1,14 @@
 ---
-
 title: Download a list of users in the Azure portal
 description: Download user records in bulk in the Azure admin center in Microsoft Entra ID.
-
 author: barclayn
 ms.author: barclayn
-manager: amycolannino
+manager: pmwongera
 ms.date: 12/19/2024
 ms.topic: how-to
 ms.service: entra-id
 ms.subservice: users
-ms.custom: it-pro
+ms.custom: it-pro, sfi-image-nochange
 ms.reviewer: krbain
 ---
 
@@ -24,7 +22,6 @@ Both admin and standard users can download user lists.
 
 ## To download a list of users
 
-[!INCLUDE [portal updates](~/includes/portal-update.md)]
 
 1. Sign in to the [Microsoft Entra admin center](https://entra.microsoft.com).
 1. Select Microsoft Entra ID.

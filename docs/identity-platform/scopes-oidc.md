@@ -4,12 +4,11 @@ description: Learn about openID connect scopes and permissions in the Microsoft 
 author: omondiatieno
 manager: CelesteDG
 ms.author: jomondi
-ms.date: 01/03/2025
+ms.date: 07/24/2025
 ms.reviewer: jawoods, ludwignick, phsignor
 ms.service: identity-platform
-
 ms.topic: concept-article
-
+ms.custom: sfi-ropc-nochange
 #Customer intent: As a developer integrating with the Microsoft identity platform, I want to understand how to request scopes and permissions, so that I can access web-hosted resources on behalf of a user and ensure fine-grained control over data access and API functionality.
 ---
 
@@ -37,8 +36,6 @@ When a resource's functionality is chunked into small permission sets, third-par
 
 In OAuth 2.0, these types of permission sets are called *scopes*. They're also often referred to as *permissions*. In the Microsoft identity platform, a permission is represented as a string value. An app requests the permissions it needs by specifying the permission in the `scope` query parameter. Identity platform supports several well-defined [OpenID Connect scopes](#openid-connect-scopes) and resource-based permissions (each permission is indicated by appending the permission value to the resource's identifier or application ID URI). For example, the permission string `https://graph.microsoft.com/Calendars.Read` is used to request permission to read users calendars in Microsoft Graph.
 
-In requests to the authorization server, for the Microsoft identity platform, if the resource identifier is omitted in the scope parameter, the resource is assumed to be Microsoft Graph. For example, `scope=User.Read` is equivalent to `https://graph.microsoft.com/User.Read`.
-
 ## Admin-restricted permissions
 
 Permissions in the Microsoft identity platform can be set to admin restricted. For example, many higher-privilege Microsoft Graph permissions require admin approval. If your app requires admin-restricted permissions, an organization's administrator must consent to those scopes on behalf of the organization's users. The following section gives examples of these kinds of permissions:
@@ -58,7 +55,7 @@ For a step by step guide on how to expose scopes in a web API, see [Configure an
 
 ## OpenID Connect scopes
 
-The Microsoft identity platform implementation of OpenID Connect has a few well-defined scopes that are also hosted on Microsoft Graph: `openid`, `email`, `profile`, and `offline_access`. The `address` and `phone` OpenID Connect scopes aren't supported.
+The Microsoft identity platform implementation of OpenID Connect has a few well-defined scopes that are also hosted on Microsoft Graph: `openid`, `email`, `profile`, and `offline_access`. The `address` and `phone` OpenID Connect scopes aren't supported. These scopes are sometimes optional and considered for ID token enrichment. These scopes will not always appear in separate lines in a consent prompt to a user.
 
 If you request the OpenID Connect scopes and a token, you get a token to call the [UserInfo endpoint](userinfo.md).
 
@@ -84,7 +81,7 @@ For a complete list of the `profile` claims available in the `id_tokens` paramet
 
 The [`offline_access` scope](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess) gives your app access to resources on behalf of the user for an extended time. On the consent page, this scope appears as the **Maintain access to data you have given it access to** permission.
 
-When a user approves the `offline_access` scope, your app can receive refresh tokens from the Microsoft identity platform token endpoint. Refresh tokens are long-lived. Your app can get new access tokens as older ones expire.
+If any delegated permission is granted, offline_access is implicitly granted. You can assume that the application has offline_access if there are any delegated permissions granted. Refresh tokens are long-lived. Your app can get new access tokens as older ones expire.
 
 > [!NOTE]
 > This permission currently appears on all consent pages, even for flows that don't provide a refresh token (such as the [implicit flow](v2-oauth2-implicit-grant-flow.md)). This setup addresses scenarios where a client can begin within the implicit flow and then move to the code flow where a refresh token is expected.
@@ -93,7 +90,7 @@ On the Microsoft identity platform (requests made to the v2.0 endpoint), your ap
 
 The access token is valid for around one hour. At that point, your app needs to redirect the user back to the `/authorize` endpoint to request a new authorization code. During this redirect and depending on app type, the user may need to enter their credentials again or consent to permissions again.
 
-The refresh token has a longer expiry than the access token and is valid for a day. For more information about how to get and use refresh tokens, see the [Microsoft identity platform protocol reference](./v2-protocols.md).
+The refresh token has a longer expiry than the access token and is typically valid for 90 days. For more information about how to get and use refresh tokens, see the [Microsoft identity platform protocol reference](./v2-protocols.md).
 
 The inclusion of the refresh token in the response can depend on several factors, including the specific configuration of your application and the scopes requested during the authorization process. If you expect to receive a refresh token in the response but fail to, consider the following factors:
 

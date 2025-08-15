@@ -9,12 +9,12 @@ ms.date: 12/19/2024
 
 ms.author: cwerner
 author: cilwerner
-manager: CelesteDG
+manager: pmwongera
 ms.reviewer: brianmel, miepping
 #Customer intent: As a customer, I want to understand how to troubleshoot macOS Platform single sign-on (PSSO) issues, have some frequently asked questions answered, and understand different scenarios to validate.
 ---
 
-# macOS Platform single sign-on known issues and troubleshooting (preview)
+# macOS Platform single sign-on known issues and troubleshooting
 
 This article outlines the current known issues and common questions with macOS Platform single sign-on (PSSO). It provides issue solutions and information on how to report an issue that isn't covered. This article also includes troubleshooting guidance.
 
@@ -68,6 +68,31 @@ If the Enterprise SSO plug-in fails to activate after system updates are applied
     ```console
     sudo swcutil reset
     ```
+### TLS Inspection URLs to be excluded for Platform SSO
+Please ensure below URLs are exempted from TLS interception/inspection so that Platform SSO token acquisition and refresh can be successfully performed on Platform SSO targeted devices:
+
+- app-site-association.cdn-apple.com
+- app-site-association.networking.apple
+- login.microsoftonline.com
+- login.microsoft.com
+- sts.windows.net
+- login.partner.microsoftonline.cn(*)
+- login.chinacloudapi.cn(*)
+- login.microsoftonline.us(*)
+- login-us.microsoftonline.com(*)
+- config.edge.skype.com(**)
+
+Apple's app-site-association domains are critical for SSO extension functioning. (*) You only need to allow sovereign cloud domains if you rely on those in your environment. (**) Maintaining communications with the Experimentation Configuration Service (ECS) ensures that Microsoft can respond to a severe bug in a timely manner. 
+
+> [!NOTE] 
+> Platform SSO is not compatible with the Microsoft Entra ID Tenant Restrictions v2 feature when Tenant Restrictions is deployed using a corporate proxy. Alternate option is listed in [TRv2 Known limitation](/entra/external-id/tenant-restrictions-v2#known-limitation)
+
+#### URLs that need to be allowed for PSSO registration flows
+
+Please ensure that traffic to the URLs listed [here](./plan-device-deployment.md#network-requirements-for-device-registration-with-microsoft-entra) is allowed by default and explicitly exempted from TLS interception or inspection. This is critical for registration flows that rely on TLS challenges to complete successfully.
+
+> [!IMPORTANT]
+> **Note: There has been a recent update to the TLS endpoint used in registration flows. Please verify that your environment’s allowlist reflects the latest URL requirements to avoid disruptions.**
 
 ### Temporary passwords issued during password reset can't be synced with Platform SSO
 
@@ -112,9 +137,12 @@ Users can reset the local password via Apple ID or an admin recovery key.
 
 ### Unexpected/frequent re-registration prompts on macOS Sequoia
 
+> [!NOTE]
+> Latest update on the PSSO re-registration issue on macOS 15.x described below: Apple confirmed the fix is deployed in macOS 15.3. If users still experience the re-registration issue on macOS 15.3+, please engage with Apple and share the logs via Apple support.
+
 There's a known concurrency issue on macOS 15+ (Sequoia) that can cause the PSSO device configuration to become corrupted. The device configuration can be corrupted by simultaneous updates from the system AppSSOAgent and AppSSODaemon processes. The corrupted configuration causes the operating system to trigger its re-registration remediation flow, resulting in unexpected registration prompts for users.
 
-This issue is currently being investigated by Apple..
+This issue is currently being investigated by Apple.
 
 Sysdiagnose logs from affected users contain the following error:
 
@@ -201,7 +229,7 @@ We'd love to hear your feedback. You should include the following information:
 
 If a user has insufficient permissions to complete Microsoft Entra ID join and registration, no error message is shown. For the device join and registration to complete successfully, the user initiating the registration flow must be allowlisted.
 
-1. In the [Microsoft Entra admin center](https://entra.microsoft.com/), navigate to **Identity** > **Devices** > **Overview** > **Device Settings**.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com/), navigate to **Entra ID** > **Devices** > **Overview** > **Device Settings**.
 1. Under **Microsoft Entra ID join and registration settings**, ensure that the **All** option is selected in the toggle menu for **Users may join devices to Microsoft Entra**.
 1. Select **Save** to apply the changes.
 
@@ -211,6 +239,10 @@ Platform Credential as Passkey option is only available if Secure Enclave is con
 
 1. Ensure that your admin set up your device with Secure Enclave as the authentication method, and [enabled passkeys (FIDO2) for your organization](/entra/identity/authentication/how-to-enable-passkey-fido2#enable-passkey-authentication-method).
 1. As a user, check that you have enabled Company Portal as a passkey provider in your device settings. Navigate to your **Settings** app, **Passwords** and **Password options**, and ensure that **Company Portal** is enabled.
+
+### Troubleshoot Microsoft Edge SSO issues
+ 
+If Edge users are facing SSO issues after Platform SSO registration, please check if the user has signed into the Edge profile. Users will need to sign into their Edge profile for browser SSO to work with Edge on Platform SSO registered devices.
 
 ### Troubleshoot Google Chrome SSO issues
 
